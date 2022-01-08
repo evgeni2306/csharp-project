@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+<table class="table table-bordered table-hover" style="width:100%">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Delete</th>
+    </tr>
+    <tbody>
+        @if (ViewBag.Products != null)
+        {
+            @foreach (var prod in ViewBag.Products)
+            {
+                <tr>
+                    <td>@prod.Item2.Name</td>
+                    <td>@prod.Item2.Price</td>
+                    <td>@prod.Item1.Quantity</td>
+                    <td>@(prod.Item1.Quantity * prod.Item2.Price)</td>
+                    <td>
+                        @Html.ActionLink(
+                            "Удалить",
+                            "Delete",
+                            "Cart",
+                            new { id= prod.Item1.Id },
+                            new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td><b>TOTAL:</b></td>
+            <td></td>
+            <td></td>
+            <td><b>@ViewBag.Total</b></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

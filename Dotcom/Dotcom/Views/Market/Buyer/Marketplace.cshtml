@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Marketplace";
+}
+
+<h1>Marketplace</h1>
+<table class="table table-bordered table-hover" style="width:100%">
+    <tr>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th> </th>
+    </tr>
+    <tbody>
+        @foreach (var prod in ViewBag.Products)
+        {
+            <tr>
+                <td>@prod.Item1.Name</td>
+                <td>@prod.Item1.Price</td>
+                <td>@prod.Item1.Quantity</td>
+                <td>
+                    @if (prod.Item2 != null)
+                    {
+                        <a>In cart</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(
+                            "В корзину",
+                            "AddToCart",
+                            "Cart",
+                            new { pid = prod.Item1.Id },
+                            new { @class = "btn btn-info" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
